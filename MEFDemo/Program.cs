@@ -14,6 +14,23 @@ namespace MEFDemo
     {
         [ImportMany]
         public IEnumerable<IMessageSender> MessageSenders { get; set; }
+
+        public void Run()
+        {
+            LoadPlugins();
+            foreach (var messageSenders in MessageSenders)
+            {
+                messageSenders.Send("Hello MEF");
+            }
+
+        }
+
+        public static void Main(string[] args)
+        {
+            var program = new Program();
+            program.Run();
+        }
+
         private void LoadPlugins()
         {
             var executableLocation = Assembly.GetEntryAssembly().Location;
@@ -30,20 +47,6 @@ namespace MEFDemo
             }
         }
 
-        public void Run()
-        {
-            LoadPlugins();
-            foreach (var messageSenders in MessageSenders)
-            {
-                messageSenders.Send("Hello MEF");
-            }
-        }
-
-        public static void Main(string[] args)
-        {
-            var program = new Program();
-            program.Run();
-        }
     }
 
 

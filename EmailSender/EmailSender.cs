@@ -10,6 +10,7 @@ namespace EmailSender
         public void Send(string message)
         {
             Console.WriteLine(message);
+            Console.ReadKey();
         }
     }
 }
